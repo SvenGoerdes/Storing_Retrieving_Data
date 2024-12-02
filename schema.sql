@@ -67,6 +67,7 @@ CREATE TABLE IF NOT EXISTS hotel_booking (
     PRIMARY KEY (booking_id),
     FOREIGN KEY (invoice_id, booking_id) REFERENCES invoice_bookings(invoice_id, booking_id),
     FOREIGN KEY (hotel_id) REFERENCES hotel(hotel_id),
+    FOREIGN KEY (booking_date) REFERENCES calendar(cal_date),
     FOREIGN KEY (hotel_start_date) REFERENCES calendar(cal_date),
     FOREIGN KEY (hotel_end_date) REFERENCES calendar(cal_date)
 );
@@ -87,12 +88,12 @@ CREATE TABLE IF NOT EXISTS flight_booking (
     booking_date varchar(4) NOT NULL,
     booking_price TINYINT DEFAULT NULL,
     flight_start_date varchar(8) NOT NULL,
-    flight_end_date varchar(8) NOT NULL,
     route_id varchar(4) NOT NULL, 
     PRIMARY KEY (booking_id),
     FOREIGN KEY (invoice_id,booking_id) REFERENCES invoice_bookings(invoice_id,booking_id),
     FOREIGN KEY (route_id) REFERENCES flight_route(route_id),
-    FOREIGN KEY (booking_date) REFERENCES calendar(cal_date)
+    FOREIGN KEY (booking_date) REFERENCES calendar(cal_date),
+    FOREIGN KEY (flight_start_date) REFERENCES calendar(cal_date)
     
 );
 
