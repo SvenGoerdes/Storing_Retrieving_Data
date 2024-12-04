@@ -74,10 +74,12 @@ INSERT INTO zip_table (zip_code, city_id) VALUES
 
 -- Insert data into calendar
 -- Assuming dates from 20230101 to 20230110
+-- Insert data into calendar
 INSERT INTO calendar (cal_date, date_year, date_month, date_day, date_quarter) VALUES
     ('19720301', '1972', '03', '01', '1'),
     ('19800101', '1980', '01', '01', '1'),
     ('19850202', '1985', '02', '02', '1'),
+    ('19800715', '1980', '07', '15', '3'),
     ('19900303', '1990', '03', '03', '1'),
     ('19950404', '1995', '04', '04', '1'),
     ('19680922', '1968', '09', '22', '3'),
@@ -173,9 +175,6 @@ INSERT INTO hotel (hotel_id, hotel_name, city_id) VALUES
     ('HOTEL018', 'Misty Mountains Cave Lodge', 'MECT0015'),  -- Misty Mountains
     ('HOTEL019', 'Iron Hills Dwarven Inn', 'MECT0016');  -- Iron Hills
     
-
-
-
 -- Insert data into invoice_bookings
 INSERT INTO invoice_bookings (invoice_id, booking_id, booking_type) VALUES
     ('INV0001', 'BOOK0001', 'Hotel'),
