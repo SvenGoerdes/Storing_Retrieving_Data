@@ -26,7 +26,15 @@ group by fr.fl_startplace
 
 -- 3.)
 --     - Number of customers per country? @Rui Ten jua
-
+select count(*),ctr.country_name from customer_table c inner join zip_table z 
+								on c.cust_zip = z.zip_code
+                                inner join city_table ct
+                                on ct.city_id = z.city_id
+                                inner join state_table st
+                                on st.state_id = ct.state_id
+                                inner join country_table ctr
+                                on ctr.country_id = st.country_id
+                                group by ctr.country_name
 
 
 

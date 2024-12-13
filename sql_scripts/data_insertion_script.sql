@@ -154,34 +154,35 @@ INSERT INTO customer_table (cust_id, cust_first_name, cust_last_name, cust_addre
     
 
 -- Insert data into hotel
-INSERT INTO hotel (hotel_id, hotel_name, city_id) VALUES
-    ('HOTEL001', 'Lisbon Grand Hotel', 'PTCT0001'),
-    ('HOTEL002', 'Milan Luxury Suites', 'ITCT0001'),
-    ('HOTEL003', 'Munich Comfort Inn', 'DECT0001'),
-    ('HOTEL004', 'Atlantic Ocean Resort', 'ATCT0001'),
-    ('HOTEL005', 'Minas Tirith White Tree Hotel', 'MECT0001'),  -- Minas Tirith
-    ('HOTEL006', 'Helms Deep Rock Lodge', 'MECT0003'),  -- Helm's Deep
-    ('HOTEL007', 'Hobbiton Shire Resthouse', 'MECT0004'),  -- Hobbiton
-    ('HOTEL008', 'Lonely Mountain Treasure Inn', 'MECT0005'),  -- Lonely Mountain
-    ('HOTEL009', 'Mirkwood Elven Suites', 'MECT0006'),  -- Mirkwood
-    ('HOTEL010', 'Orthanc Tower Stay', 'MECT0007'),  -- Orthanc
-    ('HOTEL011', 'Ithilien Forest Retreat', 'MECT0008'),  -- Ithilien
-    ('HOTEL012', 'Lothlórien Golden Leaf Lodge', 'MECT0009'),  -- Lothlórien
-    ('HOTEL013', 'Rivendell Valley Resort', 'MECT0010'),  -- Rivendell
-    ('HOTEL014', 'Isengard White Tower Hotel', 'MECT0011'),  -- Isengard
-    ('HOTEL015', 'Rhosgobel Woodland Inn', 'MECT0012'),  -- Rhosgobel
-    ('HOTEL016', 'Meduseld Golden Hall Lodge', 'MECT0013'),  -- Meduseld
-    ('HOTEL017', 'Dale Town Riverside Stay', 'MECT0014'),  -- Dale
-    ('HOTEL018', 'Misty Mountains Cave Lodge', 'MECT0015'),  -- Misty Mountains
-    ('HOTEL019', 'Iron Hills Dwarven Inn', 'MECT0016');  -- Iron Hills
+INSERT INTO hotel (hotel_id, hotel_name, city_id, rooms_available, time_stamp) VALUES
+    ('HOTEL001', 'Lisbon Grand Hotel', 'PTCT0001', 150, NOW()),
+    ('HOTEL002', 'Milan Luxury Suites', 'ITCT0001', 120, NOW()),
+    ('HOTEL003', 'Munich Comfort Inn', 'DECT0001', 100, NOW()),
+    ('HOTEL004', 'Atlantic Ocean Resort', 'ATCT0001', 80, NOW()),
+    ('HOTEL005', 'Minas Tirith White Tree Hotel', 'MECT0001', 200, NOW()),  -- Minas Tirith
+    ('HOTEL006', 'Helms Deep Rock Lodge', 'MECT0003', 90, NOW()),  -- Helm's Deep
+    ('HOTEL007', 'Hobbiton Shire Resthouse', 'MECT0004', 110, NOW()),  -- Hobbiton
+    ('HOTEL008', 'Lonely Mountain Treasure Inn', 'MECT0005', 50, NOW()),  -- Lonely Mountain
+    ('HOTEL009', 'Mirkwood Elven Suites', 'MECT0006', 75, NOW()),  -- Mirkwood
+    ('HOTEL010', 'Orthanc Tower Stay', 'MECT0007', 60, NOW()),  -- Orthanc
+    ('HOTEL011', 'Ithilien Forest Retreat', 'MECT0008', 40, NOW()),  -- Ithilien
+    ('HOTEL012', 'Lothlórien Golden Leaf Lodge', 'MECT0009', 30, NOW()),  -- Lothlórien
+    ('HOTEL013', 'Rivendell Valley Resort', 'MECT0010', 50, NOW()),  -- Rivendell
+    ('HOTEL014', 'Isengard White Tower Hotel', 'MECT0011', 80, NOW()),  -- Isengard
+    ('HOTEL015', 'Rhosgobel Woodland Inn', 'MECT0012', 90, NOW()),  -- Rhosgobel
+    ('HOTEL016', 'Meduseld Golden Hall Lodge', 'MECT0013', 120, NOW()),  -- Meduseld
+    ('HOTEL017', 'Dale Town Riverside Stay', 'MECT0014', 100, NOW()),  -- Dale
+    ('HOTEL018', 'Misty Mountains Cave Lodge', 'MECT0015', 150, NOW()),  -- Misty Mountains
+    ('HOTEL019', 'Iron Hills Dwarven Inn', 'MECT0016', 60, NOW());  -- Iron Hills
+
     
 -- Insert data into invoice_bookings
-INSERT INTO invoice_bookings (invoice_id, booking_id, cust_id, booking_type) VALUES
-    ('INV0001', 'BOOK0001', 'CUST0001', 'Hotel'),
-    ('INV0002', 'BOOK0002', 'CUST0004', 'Flight'),
-    ('INV0003', 'BOOK0003', 'CUST0007', 'Hotel'),
-    ('INV0004', 'BOOK0004', 'CUST0009', 'Flight');
--- Error Code: 1136. Column count doesn't match value count at row 2
+INSERT INTO invoice_bookings (invoice_id, booking_id, booking_type) VALUES
+    ('INV0001', 'BOOK0001', 'Hotel'),
+    ('INV0002', 'BOOK0002', 'Flight'),
+    ('INV0003', 'BOOK0003', 'Hotel'),
+    ('INV0004', 'BOOK0004', 'Flight');
+
 -- Insert data into hotel_booking
 INSERT INTO hotel_booking (invoice_id, booking_id, booking_date, booking_price, hotel_id, hotel_start_date, hotel_end_date) VALUES
     ('INV0001', 'BOOK0001', '20230102', 150.00, 'HOTEL001', '20230103', '20230105'),
@@ -196,5 +197,3 @@ INSERT INTO flight_route (route_id, fl_startplace, fl_endplace) VALUES
 INSERT INTO flight_booking (invoice_id, booking_id, booking_date, booking_price, flight_start_date, route_id) VALUES
     ('INV0002', 'BOOK0002', '20230102', 120.50, '20230103', 'ROUTE001'),
     ('INV0004', 'BOOK0004', '20230105', 180.75, '20230106', 'ROUTE002');
-
-
