@@ -21,7 +21,6 @@ from LSR.flight_route fr
 	left join LSR.city_table ct 
 		on fr.fl_startplace = ct.city_id
 group by fr.fl_startplace 
-
 	
 
 
@@ -36,21 +35,26 @@ group by fr.fl_startplace
 --     - Number of customers per age bin? @Sven Goerdes
 
 
+-- create a common table expression to calculate the age of the customers
 with age_cte as (
 Select 
-
-
-
-
-
-	ct.cust_id,
-	-- calculate age with the help of the birthday
+	ht.booking_id,
+	ib.cust_id,
 	ROUND(DATEDIFF(CURRENT_DATE(), ct.cust_birthday )/365 ,0) as age
-	from LSR.customer_table ct
+from LSR.hotel_booking as ht
+	
+left join LSR.invoice_bookings ib
+	on ht.invoice_id = ib.invoice_id
+	
+left join LSR.customer_table ct 
+	on ct.cust_id = ib.cust_id
+
+	
+	
+	-- from LSR.customer_table ct
 )
 
 Select 
-	-- create age bins
 	CASE
 		WHEN age <= 17 THEN '0-17'
 		WHEN age BETWEEN 18 AND 25 THEN '18-25'
@@ -63,11 +67,10 @@ Select
 		WHEN age BETWEEN 86 AND 95 THEN '86-95'
 		ELSE '95+'
 	END as age_bin,
-	-- count number of customers per age bin
-	COUNT(*) as number_of_customers
-	FROM age_cte
+	COUNT(DISTINCT(cust_id)) as number_of_customers,
+	COUNT(DISTINCT(booking_id)) as number_of_bookings
+FROM age_cte
 	GROUP BY age_bin;
-
 -- 5.)
 --     - Top “Country” where customers are from” in terms of revenue? @Leonardo Di Caterina
 --         - Country refers to where the customers is from
