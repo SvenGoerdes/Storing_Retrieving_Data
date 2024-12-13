@@ -39,3 +39,28 @@ END $$
 
 DELIMITER ;
 
+
+-- 2. Create a trigger for flight_booking insert
+-- This trigger fires after a new row is inserted into flight_booking
+DELIMITER $$
+CREATE TRIGGER flight_booking_insert_log
+AFTER INSERT ON flight_booking
+FOR EACH ROW
+BEGIN
+    INSERT INTO booking_log (booking_id, invoice_id, booking_type, booking_date, booking_price)
+    VALUES (NEW.booking_id, NEW.invoice_id, 'Flight', NEW.booking_date, NEW.booking_price);
+END$$
+DELIMITER ;
+
+-- 3. Create a trigger for hotel_booking insert
+-- This trigger fires after a new row is inserted into hotel_booking
+DELIMITER $$
+CREATE TRIGGER hotel_booking_insert_log
+AFTER INSERT ON hotel_booking
+FOR EACH ROW
+BEGIN
+    INSERT INTO booking_log (booking_id, invoice_id, booking_type, booking_date, booking_price)
+    VALUES (NEW.booking_id, NEW.invoice_id, 'Hotel', NEW.booking_date, NEW.booking_price);
+END$$
+DELIMITER ;
+
