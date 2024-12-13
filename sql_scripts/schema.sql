@@ -120,6 +120,6 @@ CREATE TABLE IF NOT EXISTS booking_log (
     booking_type ENUM('Hotel','Flight') NOT NULL,
     booking_date DATE NOT NULL,
     booking_price DECIMAL(10,2) NOT NULL
-) ENGINE=InnoDB;
+);
 
 
