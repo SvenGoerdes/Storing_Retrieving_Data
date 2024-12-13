@@ -176,12 +176,12 @@ INSERT INTO hotel (hotel_id, hotel_name, city_id) VALUES
     ('HOTEL019', 'Iron Hills Dwarven Inn', 'MECT0016');  -- Iron Hills
     
 -- Insert data into invoice_bookings
-INSERT INTO invoice_bookings (invoice_id, booking_id, booking_type) VALUES
-    ('INV0001', 'BOOK0001', 'Hotel'),
-    ('INV0002', 'BOOK0002', 'Flight'),
-    ('INV0003', 'BOOK0003', 'Hotel'),
-    ('INV0004', 'BOOK0004', 'Flight');
-
+INSERT INTO invoice_bookings (invoice_id, booking_id, cust_id, booking_type) VALUES
+    ('INV0001', 'BOOK0001', 'CUST0001', 'Hotel'),
+    ('INV0002', 'BOOK0002', 'CUST0004', 'Flight'),
+    ('INV0003', 'BOOK0003', 'CUST0007', 'Hotel'),
+    ('INV0004', 'BOOK0004', 'CUST0009', 'Flight');
+-- Error Code: 1136. Column count doesn't match value count at row 2
 -- Insert data into hotel_booking
 INSERT INTO hotel_booking (invoice_id, booking_id, booking_date, booking_price, hotel_id, hotel_start_date, hotel_end_date) VALUES
     ('INV0001', 'BOOK0001', '20230102', 150.00, 'HOTEL001', '20230103', '20230105'),
@@ -196,3 +196,5 @@ INSERT INTO flight_route (route_id, fl_startplace, fl_endplace) VALUES
 INSERT INTO flight_booking (invoice_id, booking_id, booking_date, booking_price, flight_start_date, route_id) VALUES
     ('INV0002', 'BOOK0002', '20230102', 120.50, '20230103', 'ROUTE001'),
     ('INV0004', 'BOOK0004', '20230105', 180.75, '20230106', 'ROUTE002');
+
+
