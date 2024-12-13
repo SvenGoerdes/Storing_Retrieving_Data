@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS hotel (
     hotel_id varchar(8) NOT NULL,
     hotel_name varchar(255) NOT NULL,
     city_id varchar(8) NOT NULL,
-    rooms_available INT(3) NOT NULL,
+    rooms_available INT NOT NULL,
     time_stamp varchar(20) NOT NULL,
     PRIMARY KEY (hotel_id),
     FOREIGN KEY (city_id) REFERENCES city_table(city_id)
@@ -98,7 +98,7 @@ CREATE TABLE IF NOT EXISTS flight_booking (
     FOREIGN KEY (flight_start_date) REFERENCES calendar(cal_date)
     
 );
-
+-- customer table containing customer information
 CREATE TABLE IF NOT EXISTS customer_table(
     cust_id varchar(8) NOT NULL,
     cust_first_name varchar(20) NOT NULL,
@@ -111,7 +111,15 @@ CREATE TABLE IF NOT EXISTS customer_table(
     FOREIGN KEY (cust_birthday) REFERENCES calendar(cal_date)
 );
 
-
-
+-- log table containing information about booking metadata
+CREATE TABLE IF NOT EXISTS booking_log (
+    log_id INT AUTO_INCREMENT PRIMARY KEY,
+    log_timestamp DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    booking_id VARCHAR(50) NOT NULL,
+    invoice_id VARCHAR(50) NOT NULL,
+    booking_type ENUM('Hotel','Flight') NOT NULL,
+    booking_date DATE NOT NULL,
+    booking_price DECIMAL(10,2) NOT NULL
+) ENGINE=InnoDB;
 
 
