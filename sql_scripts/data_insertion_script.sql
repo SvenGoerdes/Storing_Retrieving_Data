@@ -177,11 +177,11 @@ INSERT INTO hotel (hotel_id, hotel_name, city_id, rooms_available, time_stamp) V
 
     
 -- Insert data into invoice_bookings
-INSERT INTO invoice_bookings (invoice_id, booking_id, booking_type) VALUES
-    ('INV0001', 'BOOK0001', 'Hotel'),
-    ('INV0002', 'BOOK0002', 'Flight'),
-    ('INV0003', 'BOOK0003', 'Hotel'),
-    ('INV0004', 'BOOK0004', 'Flight');
+INSERT INTO invoice_bookings (invoice_id, booking_id, cust_id, booking_type) VALUES
+    ('INV0001', 'BOOK0001', 'CUST0001', 'Hotel'),
+    ('INV0002', 'BOOK0002', 'CUST0004', 'Flight'),
+    ('INV0003', 'BOOK0003', 'CUST0007', 'Hotel'),
+    ('INV0004', 'BOOK0004', 'CUST0009', 'Flight');
 
 -- Insert data into hotel_booking
 INSERT INTO hotel_booking (invoice_id, booking_id, booking_date, booking_price, hotel_id, hotel_start_date, hotel_end_date) VALUES
