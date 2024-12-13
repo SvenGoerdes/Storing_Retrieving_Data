@@ -36,6 +36,8 @@ CREATE TABLE IF NOT EXISTS hotel (
     hotel_id varchar(8) NOT NULL,
     hotel_name varchar(255) NOT NULL,
     city_id varchar(8) NOT NULL,
+    rooms_available INT(3) NOT NULL,
+    time_stamp varchar(20) NOT NULL,
     PRIMARY KEY (hotel_id),
     FOREIGN KEY (city_id) REFERENCES city_table(city_id)
 );
@@ -108,6 +110,8 @@ CREATE TABLE IF NOT EXISTS customer_table(
     FOREIGN KEY (cust_zip) REFERENCES zip_table(zip_code),
     FOREIGN KEY (cust_birthday) REFERENCES calendar(cal_date)
 );
+
+
 
 
 
