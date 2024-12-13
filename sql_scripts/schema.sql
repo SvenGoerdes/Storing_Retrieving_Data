@@ -3,6 +3,16 @@ CREATE SCHEMA IF NOT EXISTS LSR;
 
 USE LSR;
 
+
+CREATE TABLE IF NOT EXISTS calendar (
+    cal_date varchar(8) NOT NULL,
+    date_year varchar(4) NOT NULL,
+    date_month varchar(2) NOT NULL,
+    date_day varchar(2) NOT NULL,
+    date_quarter varchar(4) NOT NULL,
+    PRIMARY KEY (cal_date)
+);
+
 CREATE TABLE IF NOT EXISTS country_table (
     country_id varchar(8) NOT NULL,
     country_name varchar(30) NOT NULL,
@@ -32,6 +42,19 @@ CREATE TABLE IF NOT EXISTS zip_table (
   FOREIGN KEY (city_id) REFERENCES city_table(city_id)
 );
 
+-- customer table containing customer information
+CREATE TABLE IF NOT EXISTS customer_table(
+    cust_id varchar(8) NOT NULL,
+    cust_first_name varchar(20) NOT NULL,
+    cust_last_name varchar(20) NOT NULL,
+    cust_address TEXT NOT NULL,
+    cust_zip varchar(5) NOT NULL,
+    cust_birthday varchar(8) NOT NULL,
+    PRIMARY KEY (cust_id),
+    FOREIGN KEY (cust_zip) REFERENCES zip_table(zip_code),
+    FOREIGN KEY (cust_birthday) REFERENCES calendar(cal_date)
+);
+
 CREATE TABLE IF NOT EXISTS hotel (
     hotel_id varchar(8) NOT NULL,
     hotel_name varchar(255) NOT NULL,
@@ -45,18 +68,13 @@ CREATE TABLE IF NOT EXISTS hotel (
 CREATE TABLE IF NOT EXISTS invoice_bookings (
     invoice_id varchar(8),
     booking_id varchar(8) NOT NULL,
+    cust_id varchar(8) NOT NULL,
     booking_type varchar(8) NOT NULL, 
-    PRIMARY KEY (invoice_id, booking_id)
+    PRIMARY KEY (invoice_id, booking_id),
+    FOREIGN KEY (cust_id) REFERENCES customer_table(cust_id)
 );
 
-CREATE TABLE IF NOT EXISTS calendar (
-    cal_date varchar(8) NOT NULL,
-    date_year varchar(4) NOT NULL,
-    date_month varchar(2) NOT NULL,
-    date_day varchar(2) NOT NULL,
-    date_quarter varchar(4) NOT NULL,
-    PRIMARY KEY (cal_date)
-);
+
 
 CREATE TABLE IF NOT EXISTS hotel_booking (
     invoice_id varchar(8) NOT NULL,
@@ -97,18 +115,6 @@ CREATE TABLE IF NOT EXISTS flight_booking (
     FOREIGN KEY (booking_date) REFERENCES calendar(cal_date),
     FOREIGN KEY (flight_start_date) REFERENCES calendar(cal_date)
     
-);
--- customer table containing customer information
-CREATE TABLE IF NOT EXISTS customer_table(
-    cust_id varchar(8) NOT NULL,
-    cust_first_name varchar(20) NOT NULL,
-    cust_last_name varchar(20) NOT NULL,
-    cust_address TEXT NOT NULL,
-    cust_zip varchar(5) NOT NULL,
-    cust_birthday varchar(8) NOT NULL,
-    PRIMARY KEY (cust_id),
-    FOREIGN KEY (cust_zip) REFERENCES zip_table(zip_code),
-    FOREIGN KEY (cust_birthday) REFERENCES calendar(cal_date)
 );
 
 -- log table containing information about booking metadata
