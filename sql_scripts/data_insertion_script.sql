@@ -187,8 +187,8 @@ INSERT INTO customer_table (cust_id, cust_first_name, cust_last_name, cust_addre
 
     
 
--- Insert data into invoice_bookings
-INSERT INTO invoice_bookings (invoice_id, booking_id, cust_id, booking_type) VALUES
+-- Insert data into inv_book_match
+INSERT INTO inv_book_match (invoice_id, booking_id, cust_id, booking_type) VALUES
     ('INV1', 'BOOK1', 'CUST1', 'Hotel'),
     ('INV2', 'BOOK2', 'CUST4', 'Flight'),
     ('INV3', 'BOOK3', 'CUST7', 'Hotel'),
