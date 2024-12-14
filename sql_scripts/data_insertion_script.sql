@@ -154,50 +154,51 @@ INSERT INTO calendar (cal_date, date_year, date_month, date_day, date_quarter) V
 
 -- Insert data into customer_table
 INSERT INTO customer_table (cust_id, cust_first_name, cust_last_name, cust_address, cust_zip, cust_birthday) VALUES
-    ('CUST1', 'John', 'Doe', '123 Main St', '10000', '19800101'),
-    ('CUST2', 'Maria', 'Rossi', '456 Elm St', '20000', '19850202'),
-    ('CUST3', 'Hans', 'Schmidt', '789 Oak St', '30000', '19900303'),
-    ('CUST4', 'Alice', 'Wonderland', '101 Ocean Ave', '40000', '19950404'),
-    ('CUST5', 'Aragorn', 'Son of Arathorn', 'Minas Tirith Street', '50000', '19720301'),
-    ('CUST6', 'Eowyn', 'Shieldmaiden', 'Helms Deep Fortress', '70000', '19800715'),
-    ('CUST7', 'Frodo', 'Baggins', 'Bag End, Hobbiton', '80000', '19680922'),
-    ('CUST8', 'Samwise', 'Gamgee', '3 Bagshot Row, Hobbiton', '80001', '19690406'),
-    ('CUST9', 'Gimli', 'Son of Gloin', 'Lonely Mountain Street', '90000', '19700220'),
-    ('CUST10', 'Legolas', 'Greenleaf', 'Mirkwood Woods', '90001', '19611015'),
-    ('CUST11', 'Gandalf', 'The Grey', 'Orthanc Tower', '90002', '19500101'),
-    ('CUST12', 'Boromir', 'Son of Denethor', 'Minas Tirith Citadel', '50001', '19710912'),
-    ('CUST13', 'Faramir', 'Captain of Gondor', 'Ithilien Outpost', '50002', '19730715'),
-    ('CUST14', 'Thorin', 'Oakenshield', 'Erebor Mountain', '90003', '19591023'),
-    ('CUST15', 'Bilbo', 'Baggins', 'Bag End, Hobbiton', '80000', '19310922'),
-    ('CUST16', 'Galadriel', 'Lady of Light', 'Lothlórien Forest', '90004', '19120614'),
-    ('CUST17', 'Elrond', 'Half-elven', 'Rivendell Valley', '90005', '19051120'),
-    ('CUST18', 'Arwen', 'Undómiel', 'Rivendell Manor', '90006', '19780812'),
-    ('CUST19', 'Saruman', 'The White', 'Isengard Tower', '90007', '19400212'),
-    ('CUST20', 'Radagast', 'The Brown', 'Rhosgobel, Mirkwood', '90008', '19451010'),
-    ('CUST21', 'Théoden', 'King of Rohan', 'Meduseld, Edoras', '70001', '19601101'),
-    ('CUST22', 'Éomer', 'Marshal of the Mark', 'Edoras Stables', '70002', '19710610'),
-    ('CUST23', 'Glorfindel', 'Elf Lord', 'Rivendell Woods', '90009', '19010915'),
-    ('CUST24', 'Celeborn', 'Lord of Lothlórien', 'Lothlórien Grove', '90010', '19030518'),
-    ('CUST25', 'Bard', 'The Bowman', 'Dale Town', '90011', '19740304'),
-    ('CUST26', 'Thranduil', 'King of Mirkwood', 'Mirkwood Palace', '90012', '19060921'),
-    ('CUST27', 'Gollum', 'Smeagol', 'Misty Mountains Cave', '90013', '19431122'),
-    ('CUST28', 'Haldir', 'Warden of Lothlórien', 'Lothlórien Border', '90014', '19641109'),
-    ('CUST29', 'Balin', 'Dwarf of Erebor', 'Lonely Mountain Chamber', '90015', '19571119'),
-    ('CUST30', 'Dáin', 'Ironfoot', 'Iron Hills', '90016', '19530923');
+    ('CUST0001', 'John', 'Doe', '123 Main St', '10000', '19800101'),
+    ('CUST0002', 'Maria', 'Rossi', '456 Elm St', '20000', '19850202'),
+    ('CUST0003', 'Hans', 'Schmidt', '789 Oak St', '30000', '19900303'),
+    ('CUST0004', 'Alice', 'Wonderland', '101 Ocean Ave', '40000', '19950404'),
+    ('CUST0005', 'Aragorn', 'Son of Arathorn', 'Minas Tirith Street', '50000', '19720301'),
+    ('CUST0006', 'Eowyn', 'Shieldmaiden', 'Helms Deep Fortress', '70000', '19800715'),
+    ('CUST0007', 'Frodo', 'Baggins', 'Bag End, Hobbiton', '80000', '19680922'),
+    ('CUST0008', 'Samwise', 'Gamgee', '3 Bagshot Row, Hobbiton', '80001', '19690406'),
+    ('CUST0009', 'Gimli', 'Son of Gloin', 'Lonely Mountain Street', '90000', '19700220'),
+    ('CUST0010', 'Legolas', 'Greenleaf', 'Mirkwood Woods', '90001', '19611015'),
+    ('CUST0011', 'Gandalf', 'The Grey', 'Orthanc Tower', '90002', '19500101'),
+    ('CUST0012', 'Boromir', 'Son of Denethor', 'Minas Tirith Citadel', '50001', '19710912'),
+    ('CUST0013', 'Faramir', 'Captain of Gondor', 'Ithilien Outpost', '50002', '19730715'),
+    ('CUST0014', 'Thorin', 'Oakenshield', 'Erebor Mountain', '90003', '19591023'),
+    ('CUST0015', 'Bilbo', 'Baggins', 'Bag End, Hobbiton', '80000', '19310922'),
+    ('CUST0016', 'Galadriel', 'Lady of Light', 'Lothlórien Forest', '90004', '19120614'),
+    ('CUST0017', 'Elrond', 'Half-elven', 'Rivendell Valley', '90005', '19051120'),
+    ('CUST0018', 'Arwen', 'Undómiel', 'Rivendell Manor', '90006', '19780812'),
+    ('CUST0019', 'Saruman', 'The White', 'Isengard Tower', '90007', '19400212'),
+    ('CUST0020', 'Radagast', 'The Brown', 'Rhosgobel, Mirkwood', '90008', '19451010'),
+    ('CUST0021', 'Théoden', 'King of Rohan', 'Meduseld, Edoras', '70001', '19601101'),
+    ('CUST0022', 'Éomer', 'Marshal of the Mark', 'Edoras Stables', '70002', '19710610'),
+    ('CUST0023', 'Glorfindel', 'Elf Lord', 'Rivendell Woods', '90009', '19010915'),
+    ('CUST0024', 'Celeborn', 'Lord of Lothlórien', 'Lothlórien Grove', '90010', '19030518'),
+    ('CUST0025', 'Bard', 'The Bowman', 'Dale Town', '90011', '19740304'),
+    ('CUST0026', 'Thranduil', 'King of Mirkwood', 'Mirkwood Palace', '90012', '19060921'),
+    ('CUST0027', 'Gollum', 'Smeagol', 'Misty Mountains Cave', '90013', '19431122'),
+    ('CUST0028', 'Haldir', 'Warden of Lothlórien', 'Lothlórien Border', '90014', '19641109'),
+    ('CUST0029', 'Balin', 'Dwarf of Erebor', 'Lonely Mountain Chamber', '90015', '19571119'),
+    ('CUST0030', 'Dáin', 'Ironfoot', 'Iron Hills', '90016', '19530923');
+
 
     
 
 -- Insert data into inv_book_match
 INSERT INTO inv_book_match (invoice_id, booking_id, cust_id, booking_type) VALUES
-    ('INV1', 'BOOK1', 'CUST1', 'Hotel'),
-    ('INV2', 'BOOK2', 'CUST4', 'Flight'),
-    ('INV3', 'BOOK3', 'CUST7', 'Hotel'),
-    ('INV4', 'BOOK4', 'CUST9', 'Flight');
+    ('INV0001', 'BOOK0001', 'CUST1', 'Hotel'),
+    ('INV0002', 'BOOK0002', 'CUST4', 'Flight'),
+    ('INV0003', 'BOOK0003', 'CUST7', 'Hotel'),
+    ('INV0004', 'BOOK0004', 'CUST9', 'Flight');
 
 -- Insert data into hotel_booking
 INSERT INTO hotel_booking (invoice_id, booking_id, booking_date, booking_price, hotel_id, hotel_start_date, hotel_end_date) VALUES
-    ('INV1', 'BOOK1', '20230102', 150.00, 'HOTEL001', '20230103', '20230105'),
-    ('INV3', 'BOOK3', '20230104', 200.00, 'HOTEL003', '20230105', '20230107');
+    ('INV0001', 'BOOK0001', '20230102', 150.00, 'HOTEL001', '20230103', '20230105'),
+    ('INV0003', 'BOOK0003', '20230104', 200.00, 'HOTEL003', '20230105', '20230107');
 
 -- Insert data into flight_route
 INSERT INTO flight_route (route_id, fl_startplace, fl_endplace) VALUES
@@ -206,5 +207,5 @@ INSERT INTO flight_route (route_id, fl_startplace, fl_endplace) VALUES
 
 -- Insert data into flight_booking
 INSERT INTO flight_booking (invoice_id, booking_id, booking_date, booking_price, flight_start_date, route_id) VALUES
-    ('INV2', 'BOOK2', '20230102', 120.50, '20230103', 'ROUTE001'),
-    ('INV4', 'BOOK4', '20230105', 180.75, '20230106', 'ROUTE002');
+    ('INV0002', 'BOOK0002', '20230102', 120.50, '20230103', 'ROUTE001'),
+    ('INV0004', 'BOOK0004', '20230105', 180.75, '20230106', 'ROUTE002');
