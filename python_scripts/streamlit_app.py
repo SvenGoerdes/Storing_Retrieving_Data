@@ -6,7 +6,7 @@ import pandas as pd
 import mysql.connector
 from mysql.connector import Error
 
-def rum_mysql_string(sql_query):
+def run_mysql_string(sql_query):
     connection = None
     try:
         # Establish a connection to the local MySQL instance
@@ -53,8 +53,8 @@ def upload_booking_to_db(new_invoice, cust_id, new_booking, booking_type, bookin
 
             cursor.execute(f"USE LSR") # use the LSR database
 
-            # Insert  the new booking into the invoice_bookings table
-            cursor.execute(f"INSERT INTO invoice_bookings (invoice_id, booking_id, cust_id, booking_type) VALUES ('{new_invoice}', '{new_booking}', '{cust_id}', '{booking_type}')")
+            # Insert  the new booking into the inv_book_match table
+            cursor.execute(f"INSERT INTO inv_book_match (invoice_id, booking_id, cust_id, booking_type) VALUES ('{new_invoice}', '{new_booking}', '{cust_id}', '{booking_type}')")
 
             # Insert the new booking into the corresponding table if hotel
             if booking_type == 'Hotel':
@@ -69,9 +69,6 @@ def upload_booking_to_db(new_invoice, cust_id, new_booking, booking_type, bookin
                 cursor.execute(f"""INSERT INTO flight_booking (invoice_id, booking_id, booking_date, booking_price, flight_start_date, route_id) VALUES
                             ('{new_invoice}', '{new_booking}', '{booking_date}', '{booking_price}', '{start_date}', '{hotel_route_id}')""")
                 
-                cursor.execute(f"""INSERT INTO flight_booking (invoice_id, booking_id, booking_date, booking_price, flight_start_date, route_id) VALUES
-                            ('{new_invoice}', '{new_booking}', '{booking_date}', '{booking_price}', '{end_date}', '{hotel_route_id}')""")
-
 
         connection.commit()
         print("Script executed successfully.")
@@ -89,8 +86,6 @@ def upload_booking_to_db(new_invoice, cust_id, new_booking, booking_type, bookin
 
 
 
-
-
 hotel_sql = """Select 
                     h.hotel_name,
                     c.city_name,
@@ -101,7 +96,7 @@ hotel_sql = """Select
                     on h.city_id = c.city_id"""
 
 # query the hotels
-hotels = rum_mysql_string(hotel_sql)
+hotels = run_mysql_string(hotel_sql)
 # hotels = [(hotel[0] + ' in ' + hotel[1]) for hotel in hotels]
 
 # create a dicitonary with (hotel[0] + ' in ' + hotel[1]) as key and hotel_id as value
@@ -123,9 +118,10 @@ flights_sql = """Select
 
 
 # query the flights 
-flight_touples = rum_mysql_string(flights_sql)
+flight_touples = run_mysql_string(flights_sql)
 # create a list of strings with the flight routes
-flight_routes_list = [(flight[0] + ' --> ' + flight[1] + ' | ' +  flight[2]) for flight in flight_touples]
+
+flight_routes_list = [(flight[0] + ' --> ' + flight[1]) for flight in flight_touples]
 flight_routes_dict = dict((flight[0] + ' --> ' + flight[1], flight[2]) for flight in flight_touples)
 
 
@@ -159,16 +155,24 @@ else:
 # Step 3: Select time duration (start and end dates)
 start_date = st.date_input("Start Date", value=date.today())
 if start_date < date.today():
-    st.error("Start date cannot be in the past.")
+    st.error("Start date cannot be in the past")
 end_date = st.date_input("End Date", value=date.today())
 
-if end_date < start_date:
-    st.error("End date cannot be before start date.")
+if end_date <= start_date:
+    st.error("End date cannot be before start date or the same day as the start date.")
 
 # Step 4: Name and Surname
 name = st.text_input("First Name")
 surname = st.text_input("Last Name")
 cust_id = st.text_input("Enter your Customer ID")
+
+
+# check whether the name entry exists in the database
+sql_query = f"Select * from LSR.customer_table where cust_id = '{cust_id}'"
+result = run_mysql_string(sql_query)
+
+if not result:
+    st.error("Please enter a valid Customer ID.")
 
 if booking_type == "Hotel":
 
@@ -176,55 +180,60 @@ if booking_type == "Hotel":
     price = random_prices_hotel[list(hotel_id_dict.keys()).index(selection)] * duration
     st.write(f"Price: {price}")
 else:
-    st.write(f"Price: {flight_route_price_dict[selection]}")
+
+    price = random_prices_flight[list(flight_routes_dict.keys()).index(selection)]
+    st.write(f"Price: {price}")
+
 
 # Step 5: Submit button
 if st.button("Book Now"):
     if not name or not surname:
         st.error("Please enter both your first name and last name.")
-    elif end_date < start_date:
+    if end_date <= start_date:
         st.error("Please select a valid date range.")
     else:
         
 
 
         # transform start_date into YYYYMMDD forat 
-        start_date = start_date.strftime("%Y%m%d")
-        end_date = end_date.strftime("%Y%m%d")
+        start_date_transformed = start_date.strftime("%Y%m%d")
+        end_date_transformed = end_date.strftime("%Y%m%d")
 
-        # upload the data to the database
+ 
 
 
 
         # get highest booking_id from the database and create a new booking_id based on that
-        sql_query = "Select max(booking_id) from LSR.invoice_bookings"
+        sql_query = "Select max(booking_id) from LSR.inv_book_match"
 
-        invoice_id = rum_mysql_string(sql_query)[0][0]
-        new_booking = 'BOOK' + str(int(invoice_id[4:]) + 1)
-
+        booking_id = run_mysql_string(sql_query)[0][0]
+        # create a new booking_id based on the highest booking_id
+        new_booking = 'BOOK' + str(int(booking_id[4:]) + 1).zfill(4)
 
 
         # get highest booking_id from the database and create a new hotel_id based on that
-        sql_query = "Select max(invoice_id) from LSR.invoice_bookings"
+        sql_query = "Select max(invoice_id) from LSR.inv_book_match"
 
-        invoice_id = rum_mysql_string(sql_query)[0][0]
-        new_invoice = 'INV' + str(int(invoice_id[4:]) + 1)
+        invoice_id = run_mysql_string(sql_query)[0][0]
+        # create a new invoice_id based on the highest invoice_id
+        new_invoice = 'INV' + str(int(invoice_id[4:]) + 1).zfill(4)
+   
 
         # get the hotel_id from the hotel_id_dict
         if booking_type == 'Hotel':
-            hotel_id = hotel_id_dict[selection]
+            hotel_route_id = hotel_id_dict[selection]
         if booking_type == 'Flight':
-            route_id = flight_routes_dict[selection]
+            hotel_route_id = flight_routes_dict[selection]
 
-
-
-        # def upload_booking_to_db(new_invoice, cust_id, new_booking, booking_type, booking_date, start_date, end_date, booking_price, hotel_id)
-
-        # def upload_booking_to_db(new_invoice, cust_id, new_booking, booking_type, booking_date, start_date, end_date, booking_price, hotel_id):
-
+        # upload the booking to the database
         if booking_type == 'Hotel':
-            upload_booking_to_db(new_invoice, cust_id, new_booking, booking_type, date.today().strftime("%Y%m%d"), start_date, end_date, price, hotel_id)
-        else:
-            upload_booking_to_db(new_invoice, cust_id, new_booking, booking_type, date.today().strftime("%Y%m%d"), start_date, end_date, price, hotel_id = 'none')
 
-        st.success(f"Thank you {name} {surname}! Your {booking_type.lower()} booking for '{selection}' from {start_date} to {end_date} has been recorded.")
+            try:
+                upload_booking_to_db(new_invoice, cust_id, new_booking, booking_type, date.today().strftime("%Y%m%d"), start_date_transformed, end_date_transformed, price, hotel_route_id)
+            except:
+                st.error("An error occured while uploading the booking to the database.")
+            
+            st.success(f"Thank you {name} {surname}! Your {booking_type.lower()} booking for '{selection}' from {start_date} to {end_date} has been recorded.")
+        else:
+            upload_booking_to_db(new_invoice, cust_id, new_booking, booking_type, date.today().strftime("%Y%m%d"), start_date_transformed, end_date_transformed, price, hotel_route_id)
+            st.success(f"Thank you {name} {surname}! Your {booking_type.lower()} booking for '{selection}' from {start_date} to {end_date} has been recorded.")
