@@ -3,7 +3,6 @@ CREATE SCHEMA IF NOT EXISTS LSR;
 
 USE LSR;
 
-
 CREATE TABLE IF NOT EXISTS calendar (
     cal_date varchar(8) NOT NULL,
     date_year varchar(4) NOT NULL,
