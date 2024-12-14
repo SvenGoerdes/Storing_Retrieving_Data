@@ -85,7 +85,7 @@ def upload_booking_to_db(new_invoice, cust_id, new_booking, booking_type, bookin
             connection.close()
             print("MySQL connection is closed")
 
-
+    
 
 
 
