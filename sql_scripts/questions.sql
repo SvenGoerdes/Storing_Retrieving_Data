@@ -18,13 +18,13 @@
 		select city_name,count(*) from hotel_booking hb 
 								inner join hotel r on hb.hotel_id = r.hotel_id 
 								inner join city_table ct on r.city_id = ct.city_id
-								group by city_name
+								group by city_name;
 
 
 
 
 -- 2.)
---     - Number of flights per region? @Sven Goerdes -- mabye add additional information like flights per quarter in each city 
+--     - Number of flights per city?
 Select 
 	ct.city_name,
 	fr.fl_startplace,
@@ -37,7 +37,7 @@ group by fr.fl_startplace;
 
 
 -- 3.)
---     - Number of customers per country? @Rui Ten jua
+--     - Number of customers per country? 
 select 
 
 	ctr.country_name, 
@@ -59,7 +59,7 @@ inner join country_table ctr
 
 
 -- 4.) 
---     - Number of customers and bookings per age bin? @Sven Goerdes
+--     - Number of customers and bookings per age bin?
 
 
 -- create a common table expression to calculate the age of the customers
@@ -70,7 +70,7 @@ Select
 	ROUND(DATEDIFF(CURRENT_DATE(), ct.cust_birthday )/365 ,0) as age
 from LSR.hotel_booking as ht
 	
-left join LSR.invoice_bookings ib
+left join LSR.inv_book_match ib
 	on ht.invoice_id = ib.invoice_id
 	
 left join LSR.customer_table ct 
@@ -78,9 +78,9 @@ left join LSR.customer_table ct
 
 	
 	
-	-- from LSR.customer_table ct
+	
 )
-
+-- Select from the cte
 Select 
 	CASE
 		WHEN age <= 17 THEN '0-17'
@@ -102,11 +102,18 @@ FROM age_cte
 
 
 -- 5.)
---     - What was the most revenue quarter? @Rui Ten jua
+--     - What was the most revenue quarter for hotels and flights? @Rui Ten jua
 
 -- hotels bookings
 
-select  date_quarter,count(*) from hotel_booking hb inner join calendar c on hb.booking_date = c.cal_date group by date_quarter;
+select  date_year, date_quarter,
+	sum(booking_price) as revenue from hotel_booking hb 
+	inner join calendar c 
+		on hb.booking_date = c.cal_date group by date_year , date_quarter;
+		
 
 -- flight bookings 
-select  date_quarter,count(*) from flight_booking fb inner join calendar c on fb.booking_date = c.cal_date group by date_quarter;
+select  date_year, date_quarter,
+	sum(booking_price) as reveneu from flight_booking hb 
+	inner join calendar c 
+		on hb.booking_date = c.cal_date group by date_year , date_quarter;
