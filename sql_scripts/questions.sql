@@ -6,7 +6,19 @@
 --     - Top destinations? @Leonardo Di Caterina
 --         - for flights
 --         - hotels
+		-- flight 
 
+		select city_name,count(*) from flight_booking fb 
+								inner join flight_route r on fb.route_id = r.route_id 
+								inner join city_table ct on r.fl_endplace = ct.city_id
+								group by city_name;
+								
+		-- hotel
+
+		select city_name,count(*) from hotel_booking hb 
+								inner join hotel r on hb.hotel_id = r.hotel_id 
+								inner join city_table ct on r.city_id = ct.city_id
+								group by city_name
 
 
 
@@ -86,10 +98,15 @@ Select
 	COUNT(DISTINCT(booking_id)) as number_of_bookings
 FROM age_cte
 	GROUP BY age_bin;
+
+
+
 -- 5.)
---     - Top “Country” where customers are from” in terms of revenue? @Leonardo Di Caterina
---         - Country refers to where the customers is from
-
-
--- 6.)
 --     - What was the most revenue quarter? @Rui Ten jua
+
+-- hotels bookings
+
+select  date_quarter,count(*) from hotel_booking hb inner join calendar c on hb.booking_date = c.cal_date group by date_quarter;
+
+-- flight bookings 
+select  date_quarter,count(*) from flight_booking fb inner join calendar c on fb.booking_date = c.cal_date group by date_quarter;
