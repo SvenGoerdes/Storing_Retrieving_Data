@@ -190,10 +190,10 @@ INSERT INTO customer_table (cust_id, cust_first_name, cust_last_name, cust_addre
 
 -- Insert data into inv_book_match
 INSERT INTO inv_book_match (invoice_id, booking_id, cust_id, booking_type) VALUES
-    ('INV0001', 'BOOK0001', 'CUST1', 'Hotel'),
-    ('INV0002', 'BOOK0002', 'CUST4', 'Flight'),
-    ('INV0003', 'BOOK0003', 'CUST7', 'Hotel'),
-    ('INV0004', 'BOOK0004', 'CUST9', 'Flight');
+    ('INV0001', 'BOOK0001', 'CUST0001', 'Hotel'),
+    ('INV0002', 'BOOK0002', 'CUST0004', 'Flight'),
+    ('INV0003', 'BOOK0003', 'CUST0007', 'Hotel'),
+    ('INV0004', 'BOOK0004', 'CUST0009', 'Flight');
 
 -- Insert data into hotel_booking
 INSERT INTO hotel_booking (invoice_id, booking_id, booking_date, booking_price, hotel_id, hotel_start_date, hotel_end_date) VALUES
