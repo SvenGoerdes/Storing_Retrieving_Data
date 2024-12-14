@@ -1,6 +1,6 @@
     -- Create a trigger to insert calendar date if not availabe for customer_table
 DELIMITER $$
-CREATE TRIGGER insert_calendar_date_flight
+CREATE TRIGGER insert_calendar_date_hotel
 BEFORE INSERT ON hotel_booking
 FOR EACH ROW 
 BEGIN
