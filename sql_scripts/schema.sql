@@ -65,7 +65,7 @@ CREATE TABLE IF NOT EXISTS hotel (
     FOREIGN KEY (city_id) REFERENCES city_table(city_id)
 );
 
-CREATE TABLE IF NOT EXISTS invoice_bookings (
+CREATE TABLE IF NOT EXISTS inv_book_match (
     invoice_id varchar(8),
     booking_id varchar(8) NOT NULL,
     cust_id varchar(8) NOT NULL,
@@ -73,7 +73,6 @@ CREATE TABLE IF NOT EXISTS invoice_bookings (
     PRIMARY KEY (invoice_id, booking_id),
     FOREIGN KEY (cust_id) REFERENCES customer_table(cust_id)
 );
-
 
 
 CREATE TABLE IF NOT EXISTS hotel_booking (
@@ -85,7 +84,7 @@ CREATE TABLE IF NOT EXISTS hotel_booking (
     hotel_start_date varchar(8) NOT NULL,
     hotel_end_date varchar(8) NOT NULL,
     PRIMARY KEY (booking_id),
-    FOREIGN KEY (invoice_id, booking_id) REFERENCES invoice_bookings(invoice_id, booking_id),
+    FOREIGN KEY (invoice_id, booking_id) REFERENCES inv_book_match(invoice_id, booking_id),
     FOREIGN KEY (hotel_id) REFERENCES hotel(hotel_id),
     FOREIGN KEY (booking_date) REFERENCES calendar(cal_date),
     FOREIGN KEY (hotel_start_date) REFERENCES calendar(cal_date),
@@ -110,7 +109,7 @@ CREATE TABLE IF NOT EXISTS flight_booking (
     flight_start_date varchar(8) NOT NULL,
     route_id varchar(8) NOT NULL, 
     PRIMARY KEY (booking_id),
-    FOREIGN KEY (invoice_id,booking_id) REFERENCES invoice_bookings(invoice_id,booking_id),
+    FOREIGN KEY (invoice_id,booking_id) REFERENCES inv_book_match(invoice_id,booking_id),
     FOREIGN KEY (route_id) REFERENCES flight_route(route_id),
     FOREIGN KEY (booking_date) REFERENCES calendar(cal_date),
     FOREIGN KEY (flight_start_date) REFERENCES calendar(cal_date)
