@@ -6,7 +6,6 @@
 --     - Top destinations? @Leonardo Di Caterina
 --         - for flights
 --         - hotels
-		-- flight 
 
 		select city_name,count(*)  from flight_booking fb 
 								inner join flight_route r on fb.route_id = r.route_id 

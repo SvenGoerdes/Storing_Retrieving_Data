@@ -6749,7 +6749,7 @@ INSERT INTO flight_route (route_id, fl_startplace, fl_endplace) VALUES
 ('ROUTE110', 'GRCT0001', 'DECT0002');
 
 INSERT INTO flight_booking (invoice_id, booking_id, booking_date, booking_price, flight_start_date, route_id) VALUES
-'INV0000', 'BOKF0001', '20120511', '56.13', '20161212', 'ROUTE055'),
+('INV0000', 'BOKF0001', '20120511', '56.13', '20161212', 'ROUTE055'),
 ('INV0001', 'BOKF0002', '20220623', '912.71', '20111025', 'ROUTE107'),
 ('INV0021', 'BOKF0003', '20050801', '956.3', '20010510', 'ROUTE089'),
 ('INV0021', 'BOKF0004', '20120517', '584.77', '20221228', 'ROUTE029'),
@@ -6777,7 +6777,7 @@ INSERT INTO flight_booking (invoice_id, booking_id, booking_date, booking_price,
 ('INV0013', 'BOKF0026', '20230808', '573.31', '20170406', 'ROUTE043'),
 ('INV0010', 'BOKF0027', '20011126', '98.2', '20000428', 'ROUTE106'),
 ('INV0010', 'BOKF0028', '20031117', '640.27', '20240521', 'ROUTE036'),
-('INV0027', 'BOKF0029', '20060113', '900.0', '20190610', 'ROUTE076');(
+('INV0027', 'BOKF0029', '20060113', '900.0', '20190610', 'ROUTE076');
 
 
 INSERT INTO hotel_rating (booking_id, rating) VALUES
