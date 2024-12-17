@@ -6775,3 +6775,21 @@ INSERT INTO flight_booking (invoice_id, booking_id, booking_date, booking_price,
 ('INV0010', 'BOKF0027', '20011126', '98.2', '20000428', 'ROUTE106'),
 ('INV0010', 'BOKF0028', '20031117', '640.27', '20240521', 'ROUTE036'),
 ('INV0027', 'BOKF0029', '20060113', '900.0', '20190610', 'ROUTE076');
+
+
+INSERT INTO hotel_rating (booking_id, rating) VALUES
+('BOKF0024',2),
+('BOKF0020',1),
+('BOKF0011',1),
+('BOKF0012',1),
+('BOKF0013',5),
+('BOKF0004',5),
+('BOKF0014',3),
+('BOKF0017',5),
+('BOKF0016',5),
+('BOKF0015',5),
+('BOKF0004',4),
+('BOKF0001',4),
+('BOKF0003',3);
+
+
