@@ -8,17 +8,19 @@
 --         - hotels
 		-- flight 
 
-		select city_name,count(*) from flight_booking fb 
+		select city_name,count(*)  from flight_booking fb 
 								inner join flight_route r on fb.route_id = r.route_id 
 								inner join city_table ct on r.fl_endplace = ct.city_id
-								group by city_name;
+								group by city_name
+								order by count(*) desc;
 								
 		-- hotel
 
 		select city_name,count(*) from hotel_booking hb 
 								inner join hotel r on hb.hotel_id = r.hotel_id 
 								inner join city_table ct on r.city_id = ct.city_id
-								group by city_name;
+								group by city_name
+								order by count(*) desc;
 
 
 
@@ -29,10 +31,14 @@ Select
 	ct.city_name,
 	fr.fl_startplace,
 	Count(*) as total_number_of_flights
-from LSR.flight_route fr
+from LSR.flight_booking flight_booking
+	left join LSR.flight_route fr 
+		on flight_booking.route_id = fr.route_id
+
 	left join LSR.city_table ct 
 		on fr.fl_startplace = ct.city_id
-group by fr.fl_startplace;
+group by fr.fl_startplace
+order by total_number_of_flights desc;
 	
 
 

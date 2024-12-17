@@ -58,8 +58,6 @@ CREATE TABLE IF NOT EXISTS hotel (
     hotel_id varchar(8) NOT NULL,
     hotel_name varchar(255) NOT NULL,
     city_id varchar(8) NOT NULL,
-    rooms_available INT NOT NULL,
-    time_stamp varchar(20) NOT NULL,
     PRIMARY KEY (hotel_id),
     FOREIGN KEY (city_id) REFERENCES city_table(city_id)
 );

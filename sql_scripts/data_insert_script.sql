@@ -6504,6 +6504,7 @@ INSERT INTO hotel (hotel_name, hotel_id, city_id) VALUES
 ('name16', 'HOTEL017', 'GRCT0001'), 
 ('name17', 'HOTEL018', 'FRCT0001'), 
 ('name18', 'HOTEL019', 'FRCT0001');
+
 INSERT INTO customer_table (cust_id, cust_first_name, cust_last_name, cust_address, cust_zip, cust_birthday) VALUES
 ('CUST0001', 'John', 'Doe', '123 Main St', '80671', '19800101'),
 ('CUST0002', 'Jane', 'Smith', '456 Oak Ave', '10463', '19751212'),
@@ -6634,6 +6635,7 @@ INSERT INTO hotel_booking (invoice_id, booking_id, booking_date, booking_price, 
 ('INV0007', 'BOKH0027', '20170706', '724.46', 'HOTEL003', '20040321', '20130201'),
 ('INV0024', 'BOKH0028', '20230926', '453.11', 'HOTEL002', '20101012', '20230728'),
 ('INV0009', 'BOKH0029', '20110221', '399.0', 'HOTEL012', '20150127', '20150328');
+
 INSERT INTO flight_route (route_id, fl_startplace, fl_endplace) VALUES
 ('ROUTE001', 'ITCT0001', 'ITCT0002'),
 ('ROUTE002', 'ITCT0001', 'ITCT0003'),
@@ -6745,8 +6747,9 @@ INSERT INTO flight_route (route_id, fl_startplace, fl_endplace) VALUES
 ('ROUTE108', 'GRCT0001', 'FRCT0001'),
 ('ROUTE109', 'GRCT0001', 'DECT0001'),
 ('ROUTE110', 'GRCT0001', 'DECT0002');
+
 INSERT INTO flight_booking (invoice_id, booking_id, booking_date, booking_price, flight_start_date, route_id) VALUES
-('INV0000', 'BOKF0001', '20120511', '56.13', '20161212', 'ROUTE055'),
+'INV0000', 'BOKF0001', '20120511', '56.13', '20161212', 'ROUTE055'),
 ('INV0001', 'BOKF0002', '20220623', '912.71', '20111025', 'ROUTE107'),
 ('INV0021', 'BOKF0003', '20050801', '956.3', '20010510', 'ROUTE089'),
 ('INV0021', 'BOKF0004', '20120517', '584.77', '20221228', 'ROUTE029'),
@@ -6774,22 +6777,21 @@ INSERT INTO flight_booking (invoice_id, booking_id, booking_date, booking_price,
 ('INV0013', 'BOKF0026', '20230808', '573.31', '20170406', 'ROUTE043'),
 ('INV0010', 'BOKF0027', '20011126', '98.2', '20000428', 'ROUTE106'),
 ('INV0010', 'BOKF0028', '20031117', '640.27', '20240521', 'ROUTE036'),
-('INV0027', 'BOKF0029', '20060113', '900.0', '20190610', 'ROUTE076');
+('INV0027', 'BOKF0029', '20060113', '900.0', '20190610', 'ROUTE076');(
 
 
 INSERT INTO hotel_rating (booking_id, rating) VALUES
-('BOKF0024',2),
-('BOKF0020',1),
-('BOKF0011',1),
-('BOKF0012',1),
-('BOKF0013',5),
-('BOKF0004',5),
-('BOKF0014',3),
-('BOKF0017',5),
-('BOKF0016',5),
-('BOKF0015',5),
-('BOKF0004',4),
-('BOKF0001',4),
-('BOKF0003',3);
+('BOKH0024',2),
+('BOKH0020',1),
+('BOKH0011',1),
+('BOKH0012',1),
+('BOKH0013',5),
+('BOKH0014',3),
+('BOKH0017',5),
+('BOKH0016',5),
+('BOKH0015',5),
+('BOKH0004',4),
+('BOKH0001',4),
+('BOKH0003',3);
 
 

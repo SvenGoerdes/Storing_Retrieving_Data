@@ -1,7 +1,7 @@
------- CALENDER UPDATE TRIGGERS ------
+-- CALENDER UPDATE TRIGGERS ------
 -- 1. Create a trigger to insert calendar date if not availabe for customer_table
 DELIMITER $$
-CREATE TRIGGER insert_calendar_date_customer
+CREATE TRIGGER update_calendar_date_customer
 BEFORE UPDATE ON customer_table
 FOR EACH ROW 
 BEGIN
@@ -30,7 +30,7 @@ END$$
 
 -- 2. Create a trigger to insert calendar date if not availabe for customer_table
 DELIMITER $$
-CREATE TRIGGER insert_calendar_date_flight
+CREATE TRIGGER update_calendar_date_flight
 BEFORE UPDATE ON flight_booking
 FOR EACH ROW 
 BEGIN
@@ -77,7 +77,7 @@ END$$
 
 -- 3. Create a trigger to insert calendar date if not availabe for customer_table
 DELIMITER $$
-CREATE TRIGGER insert_calendar_date_hotel
+CREATE TRIGGER update_calendar_date_hotel
 BEFORE UPDATE ON hotel_booking
 FOR EACH ROW 
 BEGIN
@@ -140,7 +140,7 @@ BEGIN
 END$$
 
 
- ------- LOG TABLES TRIGGERS ------
+ -- LOG TABLES TRIGGERS ------
 -- 4. Create a trigger for flight_booking insert for log table
 -- This trigger fires after a new row is inserted into flight_booking
 DELIMITER $$
@@ -169,7 +169,7 @@ DELIMITER ;
 
 
 
------ CALENDER INSERTION TRIGGERS ------
+-- CALENDER INSERTION TRIGGERS ------
 -- 6. Create a trigger to insert calendar date if not availabe for customer_table
 DELIMITER $$
 CREATE TRIGGER insert_calendar_date_customer
