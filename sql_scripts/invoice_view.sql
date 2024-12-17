@@ -1,5 +1,5 @@
 
--- drop view if exists invoice_flights;
+drop view if exists invoice_flights;
 
 CREATE VIEW invoice_flights AS 
 SELECT
@@ -34,16 +34,10 @@ SELECT
         on st.country_id = cntr.country_id
 		JOIN flight_booking fb
         ON ib.invoice_id = fb.invoice_id AND ib.booking_id = fb.booking_id
-        where ib.invoice_id='INV0002'
+        
         ;
-  
-    
 
-
-
-
-
--- drop view if exists invoice_flights;
+drop view if exists invoice_hotel;
 
 CREATE VIEW invoice_hotel AS 
 SELECT
@@ -78,7 +72,7 @@ SELECT
         on st.country_id = cntr.country_id
 		JOIN hotel_booking fb
         ON ib.invoice_id = fb.invoice_id AND ib.booking_id = fb.booking_id
-        where ib.invoice_id='INV0003'
+        
         ;
   
     
