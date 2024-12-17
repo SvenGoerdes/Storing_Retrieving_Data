@@ -127,3 +127,10 @@ CREATE TABLE IF NOT EXISTS booking_log (
 );
 
 
+
+CREATE TABLE IF NOT EXISTS hotel_rating (
+    booking_id varchar(8) NOT NULL,
+    rating INT CHECK (rating BETWEEN 1 AND 5) NOT NULL,
+    PRIMARY KEY (booking_id),
+    FOREIGN KEY (booking_id) REFERENCES hotel_booking(booking_id)
+);
