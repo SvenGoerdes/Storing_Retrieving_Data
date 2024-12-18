@@ -450,8 +450,10 @@ BEGIN
     END IF;
     
 END$$
--- INSERTS 
+DELIMITER ;
 
+
+-- INSERTS 
 USE LSR;
 INSERT INTO country_table (country_id, country_name) VALUES
 ('IT00001', 'Italia'),
@@ -7249,25 +7251,18 @@ INSERT INTO hotel_rating (booking_id, rating) VALUES
 ('BOKH0003',3);
 
 
+--  VIEWS
 
-drop view if exists invoice_flights;
+drop view if exists invoice_details;
 
-CREATE VIEW invoice_flights AS 
+CREATE VIEW invoice_details AS 
 SELECT
-	"LSR" as company_name,
-    "Rua das Ameixoeiras 14, Campolide" as company_street,
-    "suporte@lsr.pt" as email,
-    "lsr.pt" as website,
+
 	ib.invoice_id,
     ib.booking_type,
     ib.booking_id,
 	ct.cust_first_name,
     ct.cust_last_name,
-    ct.cust_address,
-    ct.cust_zip,
-    cit.city_name,
-    st.state_name,
-    cntr.country_name,
 	 fb.booking_date,
      fb.booking_price
      
@@ -7279,33 +7274,17 @@ SELECT
         on zt.zip_code = ct.cust_zip
         join city_table cit
         on zt.city_id = cit.city_id
-        join state_table st 
-        on cit.state_id = st.state_id
-        join country_table cntr 
-        on st.country_id = cntr.country_id
 		JOIN flight_booking fb
         ON ib.invoice_id = fb.invoice_id AND ib.booking_id = fb.booking_id
         
-        ;
+union all
 
-drop view if exists invoice_hotel;
-
-CREATE VIEW invoice_hotel AS 
 SELECT
-	"LSR" as company_name,
-    "Rua das Ameixoeiras 14, Campolide" as company_street,
-    "suporte@lsr.pt" as email,
-    "lsr.pt" as website,
 	ib.invoice_id,
     ib.booking_type,
     ib.booking_id,
 	ct.cust_first_name,
     ct.cust_last_name,
-    ct.cust_address,
-    ct.cust_zip,
-    cit.city_name,
-    st.state_name,
-    cntr.country_name,
 	 fb.booking_date,
      fb.booking_price
      
@@ -7322,18 +7301,55 @@ SELECT
         join country_table cntr 
         on st.country_id = cntr.country_id
 		JOIN hotel_booking fb
-        ON ib.invoice_id = fb.invoice_id AND ib.booking_id = fb.booking_id
-        
-        ;
+        ON ib.invoice_id = fb.invoice_id AND ib.booking_id = fb.booking_id;
   
     
+    
+    
+    
+drop view if exists invoice_head;
+Create VIEW invoice_head as
+SELECT
+    "LSR" AS company_name,
+    "Rua das Ameixoeiras 14, Campolide" AS company_street,
+    "suporte@lsr.pt" AS email,
+    "lsr.pt" AS website,
+    CURDATE() AS date_of_issue,
+    ib.invoice_id,
+    MAX(ct.cust_first_name) AS cust_first_name,
+    MAX(ct.cust_last_name) AS cust_last_name,
+    MAX(ct.cust_address) AS cust_address,
+    MAX(ct.cust_zip) AS cust_zip,
+    MAX(cit.city_name) AS city_name,
+    MAX(st.state_name) AS state_name,
+    MAX(cntr.country_name) AS country_name,
+    ROUND(SUM(IFNULL(hb.booking_price,0)) + SUM(IFNULL(fb.booking_price,0)), 2) AS total_booking_price
 
-select * from lsr.invoice_flights;
-select * from lsr.invoice_hotel;
+FROM 
+    inv_book_match ib
+    JOIN customer_table ct
+        ON ib.cust_id = ct.cust_id
+    JOIN zip_table zt
+        ON zt.zip_code = ct.cust_zip
+    JOIN city_table cit
+        ON zt.city_id = cit.city_id
+    JOIN state_table st 
+        ON cit.state_id = st.state_id
+    JOIN country_table cntr 
+        ON st.country_id = cntr.country_id
+	LEFT JOIN flight_booking fb
+        ON ib.invoice_id = fb.invoice_id AND ib.booking_id = fb.booking_id
+    LEFT JOIN hotel_booking hb
+        ON ib.invoice_id = hb.invoice_id AND ib.booking_id = hb.booking_id
+    
+GROUP BY
+    ib.invoice_id;
+
 
 
 -- - Business questions:
 
+-- Error Code: 2014. Commands out of sync; you can't run this command now
 
 
 -- 1.)

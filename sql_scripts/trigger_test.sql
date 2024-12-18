@@ -24,8 +24,9 @@ INSERT INTO flight_booking VALUES ('INV0028', 'BOKF0030', '20240103', 1000.00, '
 
 -- hotel_booking 
 INSERT INTO inv_book_match  VALUES ('INV0029', 'BOKH0030', 'CUST0001', 'Hotel');
-INSERT INTO hotel_booking VALUES ('INV0029', 'BOKH0030', '20240103', 150.00, 'HOTEL001', '20240104', '20240110');
+INSERT INTO hotel_booking VALUES ('INV0029', 'BOKH0030', '20240103', 150.00, 'HOTEL002', '20240104', '20240110');
 
 
+-- Error Code: 1452. Cannot add or update a child row: a foreign key constraint fails (`lsr`.`hotel_booking`, CONSTRAINT `hotel_booking_ibfk_2` FOREIGN KEY (`hotel_id`) REFERENCES `hotel` (`hotel_id`))
 
 

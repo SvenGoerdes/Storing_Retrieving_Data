@@ -27,7 +27,7 @@
 -- 2.)
 --     - Number of flights per city?
 Select 
-	ct.city_name,
+	ct.city_name,	
 	fr.fl_startplace,
 	Count(*) as total_number_of_flights
 from LSR.flight_booking flight_booking
@@ -102,7 +102,8 @@ Select
 	COUNT(DISTINCT(cust_id)) as number_of_customers,
 	COUNT(DISTINCT(booking_id)) as number_of_bookings
 FROM age_cte
-	GROUP BY age_bin;
+	GROUP BY age_bin
+ORDER BY number_of_customers DESC;
 
 
 
@@ -112,13 +113,14 @@ FROM age_cte
 -- hotels bookings
 
 select  date_year, date_quarter,
-	sum(booking_price) as revenue from hotel_booking hb 
+	round(sum(booking_price),2) as revenue from hotel_booking hb 
 	inner join calendar c 
-		on hb.booking_date = c.cal_date group by date_year , date_quarter;
-		
+		on hb.booking_date = c.cal_date group by date_year , date_quarter
+ORDER BY  revenue DESC;
 
 -- flight bookings 
 select  date_year, date_quarter,
-	sum(booking_price) as reveneu from flight_booking hb 
+	round(sum(booking_price),2) as reveneu from flight_booking hb 
 	inner join calendar c 
-		on hb.booking_date = c.cal_date group by date_year , date_quarter;
+		on hb.booking_date = c.cal_date group by date_year , date_quarter
+order by reveneu desc;
